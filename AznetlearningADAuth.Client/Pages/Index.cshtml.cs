@@ -1,4 +1,6 @@
 ﻿using AznetlearningADAuth.API;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +38,11 @@ namespace AznetlearningADAuth.Client.Pages
             var content = await response.Content.ReadAsStringAsync();
 
             lstWeather = JsonConvert.DeserializeObject<List<WeatherForecast>>(content);
+
+            //SecretClient secretClient = new SecretClient(new Uri("https://az-learning-key-vault.vault.azure.net/"),
+            //   new DefaultAzureCredential());
+
+            //KeyVaultSecret keyVaultSecret = secretClient.GetSecret("cosmos-db-connectionstring");
 
             if (!response.IsSuccessStatusCode)
             {
